@@ -50,7 +50,7 @@ class RawReplayer(replayer.Replayer):
         
     def _queryElasticsearch(self, from_date, to_date, query):
         logging.debug("Connecting to ES")
-        client = Elasticsearch()
+        client = Elasticsearch([self._config['ElasticSearch']['uri']])
         
         logging.debug("Beginning search")
         s = Search(using=client, index=self._config['ElasticSearch']['raw_index'])

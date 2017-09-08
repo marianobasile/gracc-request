@@ -53,7 +53,7 @@ class TransferSummary(summary_replayer.SummaryReplayer):
 
     def _queryElasticsearch(self, from_date, to_date, query):
         logging.debug("Connecting to ES")
-        client = Elasticsearch(timeout=300)
+        client = Elasticsearch([self._config['ElasticSearch']['uri']],timeout=300)
         
         # For summaries, we only summarize full days, so strip the time from the from & to
         # Round the date up, so we get the entire last day they requested.
